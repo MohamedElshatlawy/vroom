@@ -1,7 +1,8 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/src/provider.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
+import 'package:v_room_app/viewModel/AuthViewModels/authController.dart';
 
 class CustomTextField extends StatefulWidget {
   String lablel;
@@ -30,33 +31,36 @@ class CustomTextField extends StatefulWidget {
   String initialValue;
   TextStyle hintStyle;
   Key key;
+  int maxLine;
 
-  CustomTextField(
-      {this.icon,
-      this.lablel,
-      this.filledColor,
-      this.hasBorder = true,
-      this.isEditable = true,
-      this.isNotes = false,
-      this.centerText = false,
-      this.isFinal = false,
-      this.isPhoneCode = false,
-      this.isMobile = false,
-      this.isEmail = false,
-      this.passwordIdentical,
-      this.hasPassword = false,
-      this.controller,
-      this.sufficIcon,
-      this.onFieldSubmitted,
-      this.onChanged,
-      this.onSaved,
-      this.readOnly,
-      this.style,
-      this.validator,
-      this.hintText,
-      this.initialValue,
-      this.hintStyle,
-      this.key});
+  CustomTextField({
+    this.icon,
+    this.lablel,
+    this.filledColor,
+    this.hasBorder = true,
+    this.isEditable = true,
+    this.isNotes = false,
+    this.centerText = false,
+    this.isFinal = false,
+    this.isPhoneCode = false,
+    this.isMobile = false,
+    this.isEmail = false,
+    this.passwordIdentical,
+    this.hasPassword = false,
+    this.controller,
+    this.sufficIcon,
+    this.onFieldSubmitted,
+    this.onChanged,
+    this.onSaved,
+    this.readOnly,
+    this.style,
+    this.validator,
+    this.hintText,
+    this.initialValue,
+    this.hintStyle,
+    this.key,
+    this.maxLine,
+  });
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -74,7 +78,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    //var phoneCodeProvider = Provider.of<PhoneCodeProvider>(context);
     return TextFormField(
       key: widget.key,
       initialValue: widget.initialValue,
@@ -86,9 +89,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
       onFieldSubmitted: widget.onFieldSubmitted,
       onChanged: widget.onChanged,
       onSaved: widget.onSaved,
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
       obscureText: (widget.hasPassword) ? showPassword : widget.hasPassword,
-      maxLines: (widget.isNotes) ? 3 : 1,
+      maxLines: widget.maxLine != null
+          ? widget.maxLine
+          : (widget.isNotes)
+              ? 3
+              : 1,
       textAlign: (widget.centerText) ? TextAlign.center : TextAlign.left,
       keyboardType: (widget.isEmail)
           ? TextInputType.emailAddress
@@ -118,7 +125,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ? InputBorder.none
             : OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: ColorsUtils.borderColor)),
+                borderSide: BorderSide(color: ColorsUtils.yellowBorderColor)),
         labelText: widget.lablel,
         labelStyle: TextStyle(color: ColorsUtils.onBoardingTextGrey),
         prefixIcon: widget.icon,
@@ -142,7 +149,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     textDirection: TextDirection.ltr,
                     child: CountryCodePicker(
                       onChanged: (v) {
-                       // phoneCodeProvider.setPhoneCode(v.dialCode);
+                        context.read(phoneCodeProvider).state=v.dialCode;
                       },
                       // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
                       initialSelection: '+966',
@@ -155,7 +162,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
                       // optional. Shows only country name and flag when popup is closed.
                       showOnlyCountryWhenClosed: false,
                       // optional. aligns the flag and the Text left
-
                       showFlagDialog: true,
                     ),
                   ),

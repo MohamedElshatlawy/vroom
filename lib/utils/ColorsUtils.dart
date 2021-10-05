@@ -3,25 +3,34 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ColorsUtils {
-  static const primaryGreen = Color(0xff41cbcb);
-  static const greyColor = Color.fromRGBO(250, 250, 250, 1);
-  static const copyRightsColor = Color(0xffc6c6d8);
-  static const blueColor = Color(0xff22aef4);
-  static const lightBlueColor = Color(0xffE8F7FE);
-  static const onBoardingTextGrey = Color(0xff9393aa);
-  static const textGrey = Color(0xff5a5a68);
-  static const borderColor = Color(0xfff0f0f0);
-  static const blackColor = Color(0xff5A5A68);
-  static const lineColor = Color(0xffDCDCE8);
-  static const buttonColorLight = Color(0xffF1FFFF);
-  static const modalSheetBarrierColor = Color(0xff71718D);
-  static const containerHealthCareColor = Color(0xffF1F1F9);
+  static const kPrimaryColor = Color(0xFFEDB82C);
+  static const kButtonPrimaryColor = Color(0xFFFFE345);
+  static const kButtonSecondaryColor = Color(0xFFF7EBA6);
+  static const kButtonRedColor = Color(0xFFE06738);
+  static const titleColor = Color(0xFF1F2937);
+  static const smallTextColor = Color(0xFF4B5563);
+  static const greyTextColor = Color(0xFF8C918E);
+  static const darkGreyTextColor = Color(0xFF89909E);
+  static const darkBlueGreyTextColor = Color(0xFF374151);
+  static const hintTextColor = Color(0xFF9CA3AF);
+  static const hintGrayColor = Color(0xFF6B7280);
+  static const hintLightGrayColor = Color(0xFF828282);
+  static const blackTextColor = Color(0xFF242323);
+  static const blackFillColor = Color(0xFF202326);
+  static const greyFillColor = Color(0xFF8A959E);
+  static const homeBackGroundColor = Color(0xFFF6F6F6);
+  static const dividerColor = Color(0xFFD8D8D8);
+  static const whiteColor = Colors.white;
+  static const blackColor = Colors.black;
+  static const greenColor = Color(0xFF50DB88);
 
-  static const homeBackGroundColor = Color(0xffFAFAFA);
-  static const greenBorder = Color(0xff00d65b);
-  static const starColor = Color(0xffFE9870);
-  static const darkGreenColor = Color(0xff4AD3D3);
-  static const lightGreenColor = Color(0xff4AD3D3);
-  static const unSelectTabBarColor = Color(0xff9393aa);
+  static const primaryGreen = Color(0xff37453D);
+  static const onBoardingTextGrey = Color(0xff9393aa);
+  static const borderColor = Color(0xFFBEC5D1);
+  static const yellowBorderColor = Color(0xFFEDB82C);
+
+  static const filledColor = Color(0xFFF2F2F2);
+  static const descriptionFilledColor = Color(0xFFEDF1F3);
+
   static const transparentColor = Color(0x00000000);
 }

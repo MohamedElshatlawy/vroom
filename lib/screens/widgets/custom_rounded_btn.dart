@@ -26,16 +26,18 @@ class CustomRoundedButton extends StatelessWidget {
       this.fontSize});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      child: RaisedButton(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-            side: BorderSide(color: borderColor ?? ColorsUtils.primaryGreen)),
-        color: backgroundColor,
-        onPressed: pressed ?? () {},
+    return InkWell(
+      onTap: pressed ?? () {},
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: backgroundColor ?? ColorsUtils.kButtonPrimaryColor,
+          borderRadius: BorderRadius.circular(12.r),
+          border: borderColor ?? Border.all(
+            color: borderColor ?? ColorsUtils.transparentColor,
+          ),
+        ),
         child: iconLeft
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +63,8 @@ class CustomRoundedButton extends StatelessWidget {
                     style: TextStyle(
                         color: textColor,
                         fontWeight: FontWeight.w800,
-                        fontSize: fontSize ?? ScreenUtil().setSp(15)),
+                        fontSize: fontSize ?? ScreenUtil().setSp(15),
+                    ),
                   ),
                   SizedBox(
                     width: ScreenUtil().setWidth(10),

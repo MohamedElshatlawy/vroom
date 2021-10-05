@@ -1,4 +1,4 @@
-import 'package:v_room_app/helpers/enumeration.dart';
+import 'package:v_room_app/utils/enumeration.dart';
 
 class HttpMethod extends Enum {
   HttpMethod(value) : super(value);
@@ -89,4 +89,26 @@ class BranchesTypes extends Enum {
   BranchesTypes(typeId) : super(typeId);
 
   static final rentalBranch = BranchesTypes(8900);
+}
+
+class AuthTypesEnum {
+  static final logIn = 'logIn';
+  static final signUp = 'signUp';
+}
+
+class OrdersTypesEnum {
+  static final current = 'current';
+  static final recent = 'recent';
+}
+
+class PointsEnum {
+  static final start = 'start';
+  static final end = 'end';
+}
+
+class PagesEnum {
+  static final home = 'home';
+  static final orders = 'orders';
+  static final setting = 'setting';
+  static final profile = 'profile';
 }

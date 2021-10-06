@@ -1,33 +1,70 @@
 {
   "project_info": {
-    "project_number": "703552902296",
-    "project_id": "vroom-b93ae",
-    "storage_bucket": "vroom-b93ae.appspot.com"
+    "project_number": "857050373471",
+    "project_id": "vroom-driver-76247",
+    "storage_bucket": "vroom-driver-76247.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:703552902296:android:c95e76d26b1ec3ae026ced",
+        "mobilesdk_app_id": "1:857050373471:android:80639424baac84e821aaea",
         "android_client_info": {
-          "package_name": "com.metask.vroom"
+          "package_name": "com.example.v_room_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "703552902296-vl1m5uas4f0ncisi14kltse666q27jcg.apps.googleusercontent.com",
+          "client_id": "857050373471-guv6c36hs5bmhivctgpgs2bbavm81fqp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.v_room_app",
+            "certificate_hash": "984c70dcace7880ddd2d2b9b126f981b9578387b"
+          }
+        },
+        {
+          "client_id": "857050373471-q96flqap0mhluqna7feqvus0pnfnsvjr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCb7uW0_8I8U6DWep6CxBEVz2Tuq8NGUtg"
+          "current_key": "AIzaSyCVREAdNJoEI6rrMDfDku---3Hfgz2x0xU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "703552902296-vl1m5uas4f0ncisi14kltse666q27jcg.apps.googleusercontent.com",
+              "client_id": "857050373471-q96flqap0mhluqna7feqvus0pnfnsvjr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857050373471:android:bf83b1e938e6e63a21aaea",
+        "android_client_info": {
+          "package_name": "com.metask.vroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857050373471-q96flqap0mhluqna7feqvus0pnfnsvjr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVREAdNJoEI6rrMDfDku---3Hfgz2x0xU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857050373471-q96flqap0mhluqna7feqvus0pnfnsvjr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

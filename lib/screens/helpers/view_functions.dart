@@ -15,6 +15,7 @@ import 'package:v_room_app/models/request/auth/login_request.dart';
 import 'package:v_room_app/models/request/auth/register_request.dart';
 import 'package:v_room_app/repository/authRepo/auth_repo.dart';
 import 'package:v_room_app/screens/auth/forget_password_page.dart';
+import 'package:v_room_app/screens/auth/verification_code.dart';
 import 'package:v_room_app/screens/helpers/routes.dart';
 import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
@@ -23,6 +24,7 @@ import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:v_room_app/utils/Enums.dart';
 import 'package:v_room_app/utils/TokenUtil.dart';
 import 'package:v_room_app/viewModel/AuthViewModels/authController.dart';
+import 'package:v_room_app/viewModel/AuthViewModels/otp_provider.dart';
 import 'package:v_room_app/viewModel/Orders/orders_controller.dart';
 
 class ViewFunctions {
@@ -88,6 +90,7 @@ class ViewFunctions {
                       final String authTypeWatcher =
                           watch(authTypeProvider).state;
                       final bool authLoading = watch(authLoadingProvider).state;
+                      final provider=watch(otpProvider);
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -328,7 +331,7 @@ class ViewFunctions {
                                               },
                                             );
                                           }
-                                        : () {
+                                        : () async{
                                             context
                                                 .read(authLoadingProvider)
                                                 .state = true;
@@ -346,18 +349,38 @@ class ViewFunctions {
                                                     .state,
                                               ),
                                             ).then(
-                                              (value) {
+                                              (value) async{
                                                 context
                                                     .read(authLoadingProvider)
                                                     .state = false;
                                                 if (value.code == 200) {
                                                   TokenUtil.saveToken(
                                                       value.data[0].token);
-                                                  CustomNavigator
-                                                      .pushScreenRepcalement(
-                                                    context: context,
-                                                    widget: HomePage(),
-                                                  );
+                                                  final codeSent = await provider.submitPhoneNumber(
+                                                      mobileNumber: phoneCnt.text);
+                                                  if (codeSent.isNotEmpty) {
+                                                    CustomNavigator
+                                                        .pushScreenRepcalement(
+                                                      context: context,
+                                                      widget: VerificationCode(),
+                                                    );
+                                                    // ViewFunctions.messageDialog(
+                                                    //     context: context,
+                                                    //     message: value.message,
+                                                    //     function: () {
+                                                    //       CustomNavigator
+                                                    //           .pushScreenRepcalement(
+                                                    //         context: context,
+                                                    //         widget: VerificationCode(),
+                                                    //       );
+                                                    //     });
+                                                  } else {
+                                                    ViewFunctions.messageDialog(
+                                                        context: context,
+                                                        message: 'Error Send Otp Try Again');
+                                                  }
+
+
                                                 } else {
                                                   ViewFunctions.messageDialog(
                                                       context: context,

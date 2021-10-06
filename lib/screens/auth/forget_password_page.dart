@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -15,10 +17,16 @@ import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
 import 'package:v_room_app/screens/widgets/custom_textfield.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:v_room_app/viewModel/AuthViewModels/authController.dart';
+import 'package:v_room_app/viewModel/AuthViewModels/otp_provider.dart';
 
-class ForgetPassword extends StatelessWidget {
+class ForgetPassword extends StatefulWidget {
   ForgetPassword();
 
+  @override
+  _ForgetPasswordState createState() => _ForgetPasswordState();
+}
+
+class _ForgetPasswordState extends State<ForgetPassword> {
   TextEditingController phoneCnt = TextEditingController();
 
   @override
@@ -134,6 +142,7 @@ class ForgetPassword extends StatelessWidget {
                 Consumer(builder: (context, watch, widget) {
                   final bool forgetLoading =
                       watch(forgetPasswordLoadingProvider).state;
+                  final provider=watch(otpProvider);
                   return Align(
                     alignment: Alignment.center,
                     child: forgetLoading
@@ -148,7 +157,7 @@ class ForgetPassword extends StatelessWidget {
                             textColor: ColorsUtils.kPrimaryColor,
                             height: 49.h,
                             width: 256.w,
-                            pressed: () {
+                            pressed: () async{
                               context
                                   .read(forgetPasswordLoadingProvider)
                                   .state = true;
@@ -159,20 +168,29 @@ class ForgetPassword extends StatelessWidget {
                                       context.read(phoneCodeProvider).state,
                                 ),
                               ).then(
-                                (value) {
+                                (value) async{
                                   context
                                       .read(forgetPasswordLoadingProvider)
                                       .state = false;
                                   if (value.code == 200) {
-                                    ViewFunctions.messageDialog(
-                                        context: context,
-                                        message: value.message,
-                                        function: () {
-                                          CustomNavigator.pushScreenRepcalement(
-                                            context: context,
-                                            widget: ResetCode(),
-                                          );
-                                        });
+                                    final codeSent = await provider.submitPhoneNumber(
+                                        mobileNumber: phoneCnt.text);
+                                    if (codeSent.isNotEmpty) {
+                                      ViewFunctions.messageDialog(
+                                          context: context,
+                                          message: value.message,
+                                          function: () {
+                                            CustomNavigator.pushScreenRepcalement(
+                                              context: context,
+                                              widget: ResetCode(),
+                                            );
+                                          });
+                                    } else {
+                                      ViewFunctions.messageDialog(
+                                          context: context,
+                                          message: 'Error Send Otp Try Again');
+                                    }
+
                                   } else {
                                     ViewFunctions.messageDialog(
                                         context: context,
@@ -180,6 +198,23 @@ class ForgetPassword extends StatelessWidget {
                                   }
                                 },
                               );
+                              //       final codeSent = await provider.submitPhoneNumber(
+                              //           mobileNumber: phoneCnt.text);
+                              //       if (codeSent.isNotEmpty) {
+                              //         ViewFunctions.messageDialog(
+                              //             context: context,
+                              //             message: 'value.message',
+                              //             function: () {
+                              //               CustomNavigator.pushScreenRepcalement(
+                              //                 context: context,
+                              //                 widget: ResetCode(),
+                              //               );
+                              //             });
+                              //       } else {
+                              //         ViewFunctions.messageDialog(
+                              //             context: context,
+                              //             message: 'Error Send Otp Try Again');
+                              //       }
                             },
                           ),
                   );

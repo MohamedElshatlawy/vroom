@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -12,20 +9,19 @@ import 'package:v_room_app/generated/l10n.dart';
 import 'package:v_room_app/screens/auth/reset_password_page.dart';
 import 'package:v_room_app/screens/helpers/routes.dart';
 import 'package:v_room_app/screens/helpers/view_functions.dart';
+import 'package:v_room_app/screens/home.dart';
 import 'package:v_room_app/screens/widgets/custom_rounded_btn.dart';
 import 'package:v_room_app/screens/widgets/phoneCodeTextField.dart';
 import 'package:v_room_app/utils/ColorsUtils.dart';
 import 'package:v_room_app/viewModel/AuthViewModels/otp_provider.dart';
 
-class ResetCode extends StatefulWidget {
-  ResetCode();
+class VerificationCode extends StatefulWidget {
 
   @override
-  _ResetCodeState createState() => _ResetCodeState();
+  _VerificationCodeState createState() => _VerificationCodeState();
 }
 
-class _ResetCodeState extends State<ResetCode> {
-  TextEditingController phoneCnt = TextEditingController();
+class _VerificationCodeState extends State<VerificationCode> {
 
   TextEditingController controller = TextEditingController(text: "");
 
@@ -69,7 +65,7 @@ class _ResetCodeState extends State<ResetCode> {
                       boxShadow: [
                         BoxShadow(
                           color:
-                              ColorsUtils.kButtonPrimaryColor.withOpacity(0.58),
+                          ColorsUtils.kButtonPrimaryColor.withOpacity(0.58),
                           offset: Offset(0, 10),
                           blurRadius: 60,
                         ),
@@ -84,7 +80,9 @@ class _ResetCodeState extends State<ResetCode> {
                   height: 29.h,
                 ),
                 Text(
-                  S.of(context).success,
+                  S
+                      .of(context)
+                      .success,
                   style: TextStyle(
                     color: ColorsUtils.darkBlueGreyTextColor,
                     fontSize: 24.sp,
@@ -95,7 +93,9 @@ class _ResetCodeState extends State<ResetCode> {
                   height: 8.h,
                 ),
                 Text(
-                  S.of(context).checkPhone,
+                  S
+                      .of(context)
+                      .checkPhone,
                   style: TextStyle(
                     color: ColorsUtils.hintGrayColor,
                     fontSize: 16.sp,
@@ -117,30 +117,10 @@ class _ResetCodeState extends State<ResetCode> {
                   pinBoxOuterPadding: EdgeInsets.symmetric(horizontal: 5.0),
                   keyboardType: TextInputType.number,
                   pinTextStyle:
-                      TextStyle(color: ColorsUtils.blackColor, fontSize: 20),
+                  TextStyle(color: ColorsUtils.blackColor, fontSize: 20),
                   onTextChanged: (val) {},
                   onDone: (val) {},
                 ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       PhoneCodeTextField(
-                //         controller: phoneCnt,
-                //       ),
-                //       PhoneCodeTextField(
-                //         controller: phoneCnt,
-                //       ),
-                //       PhoneCodeTextField(
-                //         controller: phoneCnt,
-                //       ),
-                //       PhoneCodeTextField(controller: phoneCnt,),
-                //       PhoneCodeTextField(controller: phoneCnt,),
-                //       PhoneCodeTextField(controller: phoneCnt,),
-                //     ],
-                //   ),
-                // ),
                 SizedBox(
                   height: 35.h,
                 ),
@@ -148,14 +128,18 @@ class _ResetCodeState extends State<ResetCode> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      S.of(context).canNotGetEmail,
+                      S
+                          .of(context)
+                          .canNotGetEmail,
                       style: TextStyle(
                           color: ColorsUtils.hintGrayColor,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      S.of(context).reSubmit,
+                      S
+                          .of(context)
+                          .reSubmit,
                       style: TextStyle(
                         color: ColorsUtils.kPrimaryColor,
                         fontSize: 16.sp,
@@ -172,7 +156,9 @@ class _ResetCodeState extends State<ResetCode> {
                       alignment: Alignment.center,
                       child: CustomRoundedButton(
                           backgroundColor: ColorsUtils.kButtonPrimaryColor,
-                          text: S.of(context).submit,
+                          text: S
+                              .of(context)
+                              .submit,
                           fontSize: 14.sp,
                           textColor: ColorsUtils.kPrimaryColor,
                           height: 49.h,
@@ -182,7 +168,7 @@ class _ResetCodeState extends State<ResetCode> {
                                 smsCode: controller.text);
                             if (userId.isNotEmpty) {
                               CustomNavigator.pushScreenRepcalement(
-                                widget: ResetPassword(), context: context,
+                                widget: HomePage(), context: context,
                               );
                             } else {
                               ViewFunctions.showCustomSnackBar(
@@ -190,7 +176,6 @@ class _ResetCodeState extends State<ResetCode> {
                                 text: provider.errorMessage,
                               );
                             }
-
                           }),
                     );
                   },
